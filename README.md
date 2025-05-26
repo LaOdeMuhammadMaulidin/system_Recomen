@@ -86,7 +86,7 @@ Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan 
 
 Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang ditunjukkan berikut ini.
 
-![Top-10 Book Recommendation](![image](https://github.com/user-attachments/assets/a0527e81-996e-4d7a-89fc-1b410db21ce3)
+![Top-10 Book Recommendation](https://github.com/user-attachments/assets/a0527e81-996e-4d7a-89fc-1b410db21ce3)
 )
 
 ## Evaluation
@@ -108,7 +108,7 @@ Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu mod
 
 Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
 
-![Model Metrics](![image](https://github.com/user-attachments/assets/97b5af90-8f48-445b-b677-1e12d02edfee)
+![Model Metrics](https://github.com/user-attachments/assets/97b5af90-8f48-445b-b677-1e12d02edfee)
 )
 
 
