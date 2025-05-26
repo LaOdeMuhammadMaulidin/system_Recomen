@@ -2,11 +2,12 @@
 
 ## Domain Proyek
 
-Pada saat ini, penyakit stroke menjadi penyakit yang bisa berpotensi menyebabkan kematian. Di seluruh dunia, jumlah kasus stroke terus meningkat, dan memahami faktor-faktor yang mempengaruhi resiko kematian pada pasien stroke adalah langkah penting dalam penanganan dan perawatan yang lebih baik. Stroke adalah tanda-tanda klinis yang terjadi secara cepat atau mendadak berupa defisit fokal (atau global) pada fungsi otak, dengan gejala yang berlangsung selama 24 jam atau lebih atau menyebabkan kematian, tanpa penyebab yang jelas selain penyebab vaskuler (WHO). Menurut data World Health Organization (WHO) diperkirakan 17,5 juta orang meninggal dunia akibat penyakit kardiovaskular dengan 6,7 juta orang meninggal akibat stroke, yaitu urutan kedua tertinggi mengakibatkan kematian setelah penyakit jantung koroner. 
+Di era digital saat ini, jumlah informasi yang tersedia secara online terus meningkat secara eksponensial, termasuk dalam industri literasi dan perpustakaan digital. Masyarakat modern semakin terbiasa mengakses buku secara daring melalui platform e-commerce, perpustakaan digital, dan aplikasi baca online. Hal ini menyebabkan tantangan baru bagi pengguna dalam menemukan buku yang relevan atau sesuai dengan preferensi mereka di antara ribuan hingga jutaan pilihan yang tersedia.Salah satu solusi yang dapat diterapkan untuk mengatasi permasalahan tersebut adalah dengan membangun sistem rekomendasi buku. Sistem ini bertujuan untuk menyajikan rekomendasi buku yang bersifat personal, berdasarkan riwayat pembacaan pengguna, penilaian (rating), minat, atau karakteristik buku itu sendiri. Dengan adanya sistem rekomendasi, pengalaman pengguna dalam menemukan bacaan yang sesuai dapat ditingkatkan secara signifikan, serta mendukung peningkatan minat baca masyarakat.
 
-Dengan perkembangan teknologi yang semakin pesat kita dapat dengan mudah mengetahui resiko terkena stroke dengan beberapa gejala yang di alami. salah satu metode tersebut adalah machine learning yang merupakan proses belajar komputer tanpa harus di program secara eksplisit. dengan adanya ML kita dapat mengetahui serta mengklasifikasikan apakah kita beresiko stroke atau tidak
+Sistem rekomendasi telah banyak digunakan oleh perusahaan teknologi besar seperti Amazon, Goodreads, dan Google Books. Umumnya, sistem ini dibangun dengan menggunakan algoritma machine learning seperti content-based filtering, collaborative filtering, atau gabungan keduanya dalam bentuk hybrid recommendation system. Salah satu metode yang populer dalam collaborative filtering adalah dengan menggunakan pendekatan berbasis data rating pengguna, yang memprediksi preferensi pengguna baru berdasarkan kesamaan dengan pengguna lain.
+
   
-[Prediksi Penyakit Stroke Menggunakan Machine Learning Dengan Algoritma Random Forest](https://e-jurnal.pnl.ac.id/infomedia/article/view/5199 ) 
+[Sistem Recomendasi Buku Menggunakan ML](https://ejurnal.umri.ac.id/index.php/coscitech/article/view/5131)) 
 
 ## Business Understanding
 
@@ -14,97 +15,54 @@ Dengan perkembangan teknologi yang semakin pesat kita dapat dengan mudah mengeta
 ### Problem Statements
 
 Beradasarkan latar belakang di atas didapatkan rincian masalah:
-- Dengan tingginya angka kematian stroke secara golbal, bagaimana cara mengidentifikasi resiko stroke menggunakan Machine Learning algoritma Random Forest?
+- pengguna menghadapi kesulitan dalam menemukan buku yang relevan dengan minat dan preferensi pribadi mereka.
 - Bagaimana melakukan evaluasi untuk membuat model machine learning yang efisien guna mengidentifikasi resiko stroke?
 
 ### Goals
 
 Menjelaskan tujuan dari pernyataan masalah:
-- Memprediksi risiko terkena stroke berdasarkan faktor-faktor kesehatan menggunakan algoritma Machine Learning Random Forest.
-- Menganalisis metrik evaluasi model Random Forest dan fitur-fitur penting yang teridentifikasi untuk memastikan model tidak hanya akurat dalam memprediksi risiko   stroke, tetapi juga memberikan wawasan yang relevan dan dapat diinterpretasikan untuk mendukung pengambilan keputusan klinis.
+- Mengembangkan sistem rekomendasi buku yang dapat membantu pengguna menemukan bacaan sesuai dengan minat atau riwayat interaksi mereka.
+- Mengurangi waktu dan usaha pengguna dalam mencari buku yang sesuai dengan preferensinya.
 
 
     ### Solution statements
-    - melakukan cleaning data dengan menghilangkan missing value yang ada dan menghapus duplikat dari data
-    - melakukan splitt data dengan rasio 80% data training dan 20% data testing
-    - menggunakan random forest clasifier untuk mengidentifikasi resiko diabetes dengan parameter yang sesuai.
-    - melakukan evaluasi dengan mengetahui accuracy, recall, presision dan f1 score serta menampilkan confussion matriks
+    - Menganalisis riwayat interaksi pengguna seperti rating atau pencarian buku
+    - Menampilkan daftar rekomendasi buku secara otomatis dan dinamis sesuai perilaku pengguna.
 
 ## Data Understanding
 
- Dataset yang dogunakan adalah dataset prediksi resiko stroke V2 ini di dapatkan di [Kaggle] https://www.kaggle.com/datasets/mahatiratusher/stroke-risk-prediction-dataset-v2 
- ![img](https://github.com/user-attachments/assets/5dbead7e-47c9-4ada-8bac-b4bd7c69aa5d)
-  DATASET ini berjumlah 35.000 data dan 19 Kolom.
-### Variabel-variabel pada dataset adalah sebagai berikut:
-- age : merupakan variabel yang menampilkan umur seseorang.
-- gender : merupakan variabel yang menampilkan jenis kelamin seseorang.
-- chest pain : merupakan variabel yang menunjukan apakah seseorang mengalami sakit pada dada atau tidak.
-- high_blood_pressure:  merupakan variabel apakah tekanan darah tinggi atau tidak
-- irregular_heartbeat : merupakan variabel apakah detak jantung tidak normal atau normal
-- shortness_of_breath : merupakan variabel apakah bernafas dengan baik atau tidak
-- fatigue_weakness    : merupakan variabel apakah sering lelah atau tidak
-- dizziness : merupakan variabel apakah sering pusing atau tidak
-- swelling_edema : merupakan variabel apakah mengalami pembengkakkan edema atau tidak
-- neck_jaw_pain : merupakan variabel apakah mnderita sakit pada rahang atau tidak
-- excessive_sweating : merupakan variabel apakah bekeringat berlebih atau tidak
-- persistent_cough merupakan variabel apakah menderita batuk atau tidak
-- nausea_vomiting: merupakan variabel apakah menderita mual dan mutah atau tidak
-- chest_discomfort: merupakan variabel apakah dada merasa nyaman atau tidak
-- cold_hands_feet: merupakan variabel apakah tangan dan kaki dingin atau tidak
-- snoring_sleep_apnea: merupakan variabel apakah mendengkur saat tidur atau tidak
-- anxiety_doom: merupakan variabel apakah mengalami kecemasan berlebih atau tidak
-- stroke_risk_percentage: merupakan presentasi dari resiko stroke
-- at_risk: merupakan variabel apakah beresiko stroke atau tidak
-  **Proses EDA**
-  Pada proses Visualisasi untuk melihat perbadingan dataset di peroleh
-  - gender : pada kolom ini perbadingan datanya 49,9% untuk perempuan dan 50,1% untuk laki laki
-  - chest_pain : pada kolom ini perbadingan datanya 78,3% untuk perempuan dan 21,7% untuk laki laki
-  - high_blood_pressure : pada kolom ini perbadingan datanya 65,3% untuk perempuan dan 34,7% untuk laki laki
-  - iregullar_heartbeat : pada kolom ini perbadingan datanya 84% untuk perempuan dan 16% untuk laki laki
-  - shortness_of_breath : pada kolom ini perbadingan datanya 73,2% untuk perempuan dan 26,8% untuk laki laki
-  - fatigue_weakness : pada kolom ini perbadingan datanya 68% untuk perempuan dan 32% untuk laki laki
-  - dizziness : pada kolom ini perbadingan datanya 73,5% untuk perempuan dan 26,5% untuk laki laki
-  - swelling_edema : pada kolom ini perbadingan datanya 78,3% untuk perempuan dan 21,7% untuk laki laki
-  - neck_jaw_pain : pada kolom ini perbadingan datanya 84% untuk perempuan dan 16% untuk laki laki
-  - excessive_sweating : pada kolom ini perbadingan datanya 84,8% untuk perempuan dan 15,2% untuk laki laki
-  - persistent_cough : pada kolom ini perbadingan datanya 83,3% untuk perempuan dan 16,7% untuk laki laki
-  - nausea_vomiting : pada kolom ini perbadingan datanya 85% untuk perempuan dan 15% untuk laki laki
-  - chest_discomfort : pada kolom ini perbadingan datanya 78,4% untuk perempuan dan 21,6% untuk laki laki
-  - cold_hands_feet : pada kolom ini perbadingan datanya 73% untuk perempuan dan 27% untuk laki laki
-  - snoring_sleep_apnea : pada kolom ini perbadingan datanya 77,9% untuk perempuan dan 22,1% untuk laki laki
-  - anxiety_doom : pada kolom ini perbadingan datanya 84,9% untuk perempuan dan 15,1% untuk laki laki
-  - at_risk : pada kolom ini perbadingan datanya 38,4% untuk perempuan dan 61,6% untuk laki laki
- 
-  Pada Proses Pengecekkan outlier di peroleh : 
-  Ada outlier Pada age
-  Jumlah Outlier : 12
-  Tidak ada Outlier Pada gender
-  Ada outlier Pada chest_pain
-  Jumlah Outlier : 4054
-  Tidak ada Outlier Pada high_blood_pressure
-  Ada outlier Pada irregular_heartbeat
-  Jumlah Outlier : 3001
-  Tidak ada Outlier Pada shortness_of_breath
-  Tidak ada Outlier Pada fatigue_weakness
-  Tidak ada Outlier Pada dizziness
-  Ada outlier Pada swelling_edema
-  Jumlah Outlier : 4068
-  Ada outlier Pada neck_jaw_pain
-  Jumlah Outlier : 3001
-  Ada outlier Pada excessive_sweating
-  Jumlah Outlier : 2843
-  Ada outlier Pada persistent_cough
-  Jumlah Outlier : 3135
-  Ada outlier Pada nausea_vomiting
-  Jumlah Outlier : 2806
-  Ada outlier Pada chest_discomfort
-  Jumlah Outlier : 4053
-  Tidak ada Outlier Pada cold_hands_feet
-  Ada outlier Pada snoring_sleep_apnea
-  Jumlah Outlier : 4145
-  Ada outlier Pada anxiety_doom
-  Jumlah Outlier : 2828
-  Tidak ada Outlier Pada at_risk
+ ![Book Recommendation Dataset](https://i.postimg.cc/0Q4fcMDB/rsz-bookrecommendationdataset.jpg)
+
+Informasi Dataset:
+
+Jenis | Keterangan
+--- | ---
+Title | Book Recommendation Dataset
+Source | [Kaggle](https://www.kaggle.com/arashnic/book-recommendation-dataset)
+Maintainer | [Möbius](https://www.kaggle.com/arashnic)
+License | [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
+Usability | 10.0
+
+Pada Dataset ini terdapat 3 berkas csv diantaranya yaitu `Books.csv` , `Ratings.csv` , dan `Users.csv`
+
+Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.360 baris dan memiliki 8 kolom, diantaranya adalah :  
+
+- `ISBN` : berisi kode ISBN dari buku  
+- `Book-Title` : berisi judul buku
+- `Book-Author` : berisi penulis buku
+- `Year-Of-Publication` : tahun terbit buku  
+- `Publisher` : penerbit buku  
+- `Image-URL-S` : URL menuju gambar buku berukuran kecil
+- `Image-URL-M` : URL menuju gambar buku berukuran sedang
+- `Image-URL-L` : URL menuju gambar buku berukuran besar
+
+Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. Data ini memiliki 1.149.780 baris dan memiliki 3 kolom, yaitu :  
+
+ - `User-ID` : berisi ID unik pengguna
+ - `ISBN` : berisi kode ISBN buku yang diberi rating oleh pengguna
+ - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10
+
+![Cuplikan Data Rating](https://i.postimg.cc/wB2m0Qnc/Screenshot-39.png)
 
 ## Data Preparation
 Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data:
