@@ -65,54 +65,52 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
 ![Cuplikan Data Rating](https://i.postimg.cc/wB2m0Qnc/Screenshot-39.png)
 
 ## Data Preparation
-Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data:
-- Meload Dataset ke dalam sebuah Dataframe menggunakan pandas
-- menghapus kolom yang tidak digunakan dan kali ini yang di hapus adalah kolom stroke_risk_percentage
-- ``` df.info()``` digunakan untuk mengecek tipe kolom pada dataset
-- ```df.isna().sum()``` digunakan untuk mengecek apakah ada kolom yg kosong, ternyata pada dataset ini tidak ditemukan missing value. ketika ada missing value maka di atasi dengan   ``` df.dropna(inplace=True)``` 
-- ```df.describe()``` digunakan utk mendapatkan info mengenai dataset terhadap nilai rata-rata, median, banyaknya data, nilai Q1 hingga Q3 dan lain-lain
-- melakukan pengecekan duplikat dengan ```df.duplicated().sum()```. Pada Dataset ini ditemuka sebanyak 16279 data duplikat dan dilakukan penghapusan duplikat dengan cara ```df.drop_duplicates(inplace=True)```
-- Melakukan mapping terhadap kolom diagnosis dari type object ke numerik agar bisa dibaca mesin. Dimana pada kolom age Male  diubah ke nilai 1 female diubah ke nilai 0
-- Melakukan pengecekkan distribusi kelas target serta membagi data menjadi data latih dan data test dengan rasio 80 banding 20% serta melihat penyebaran data test dan data latih
-![img](https://github.com/user-attachments/assets/27d65e3c-ead1-4371-a470-ce28dcbead0a)
+Teknik yang digunakan dalam penyiapan data *(Data Preparation)* yaitu:
+- **Handling Imbalanced Data** : Seperti yang telah diketahui sebelumnya bahwa jumlah rating tidak seimbang (imbalance) yang mana sebagian besar user memberikan rating 0 pada buku. Hal ini dapat mengakibatkan model memiliki kinerja yang buruk. Untuk mengatasi hal tersebut, pada proyek ini data dengan rating 0 akan dihapus *(di-drop)*. Walaupun jumlah data saat ini berkurang drastis namun distribusi data menjadi lebih seimbang dan diharapkan memiliki kinerja yang lebih baik.
+- **Encoding** : dilakukan untuk menyandikan `User-ID` dan `ISBN` ke dalam indeks integer. Tahapan ini diperlukan karena kedua data tersebut berisi integer yang tidak berurutan (acak) dan gabungan string. Untuk itu perlu diubah ke dalam bentuk indeks.
+- **Randomize Dataset** : pengacakan data agar distribusi datanya menjadi random. Pengacakan data bertujuan untuk mengurangi varians dan memastikan bahwa model tetap umum dan *overfit less*. Pengacakan data juga memastikan bahwa data yang digunakan saat validasi merepresentasikan seluruh distribusi data yang ada.
+- **Data Standardization** : Pada data rating yang digunakan pada proyek ini berada pada rentang 0 hingga 10. Penerapan standarisasi menjadi rentang 0 hingga 1 dapat mempermudah saat proses training. Hal ini dikarenakan variabel yang diukur pada skala yang berbeda tidak memberikan kontribusi yang sama pada model fitting & fungsi model yang dipelajari dan mungkin berakhir dengan menciptakan bias jika data tidak distandarisasi terlebih dulu.
+- **Data Splitting** : dataset dibagi menjadi 2 bagian, yaitu data yang akan digunakan untuk melatih model (sebesar 80%) dan data untuk memvalidasi model (sebesar 20%). Tujuan dari pembagian data uji dan validasi tidak lain adalah untuk proses melatih model serta mengukur kinerja model yang telah didapatkan.
 
 ## Modeling
-Pada tahap ini dilakukan pembuatan model ML random forest dengan kroteria sebagai berikut : 
-![Model Random Forest](![image](https://github.com/user-attachments/assets/dca84a82-8311-4786-8d6c-944e147a683a)
+Pada tahap ini, model menghitung skor kecocokan antara pengguna dan buku dengan teknik embedding. 
 
- ### Cara Kerja
-Mula mula import library model random forest ```from sklearn.ensemble import RandomForestClassifier``` kemudian import library untuk evaluasi ``` from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, precision_score, recall_score, f1_score``` kemudian setelah itu baut variabel yang berisi ```RandomForestClassifier``` yang Secara acak mengambil sampel data pelatihan dengan penggantian Proses ini diulang sebanyak jumlah pohon yang ditentukan oleh parameter n_estimators (dalam kasus ini, 100 kali). Setiap sampel bootstrap akan digunakan untuk melatih satu pohon keputusan.Setelah semua pohon (sesuai dengan n_estimators) selesai dibangun, kumpulan pohon ini akan menjadi Random Forest yang terlatih. Setiap pohon akan membuat prediksi kelas untuk sampel tersebut berdasarkan aturan-aturan yang telah dipelajarinya selama pelatihan.Hasil prediksi dari semua pohon akan diagregasikan. Untuk klasifikasi, metode agregasi yang paling umum adalah majority voting: kelas yang paling sering diprediksi oleh semua pohon akan menjadi prediksi akhir untuk sampel tersebut. Hasil prediksi untuk semua sampel dalam test_features akan dikembalikan dalam bentuk array NumPy dan disimpan dalam variabel predict.
+Beberapa properti yang digunakan dalam kelas RecommenderNet dan menjadi parameter pada layer embedding untuk menghasilkan model diantaranya:
+- `num_users` : jumlah data pengguna
+- `num_isbn` : jumlah data buku, dihitung berdasarkan ISBN
+- `embedding_size` : ukuran atau dimensi yang digunakan dalam embedding pada data user dan buku
 
-### Parameter
-Parameter ini menentukan jumlah pohon keputusan dalam forest. Semakin banyak pohon yang dibangun, biasanya kinerja model akan lebih baik dan lebih stabil (kurang rentan terhadap overfitting hingga titik tertentu). Namun, dengan jumlah pohon yang sangat banyak, waktu pelatihan dan prediksi juga akan meningkat, dan manfaat penambahannya mungkin akan berkurang. nilai 100 Ini berarti model Random Forest akan terdiri dari 100 pohon keputusan yang berbeda.
+Pertama, kita melakukan proses embedding terhadap data user dan buku. Jumlah user dan buku yang didefinisikan pada `num_users` dan `num_isbn` bertujuan sebagai input untuk membuat vektor embedding keduanya. Sedangkan `embedding_size` menentukan ukuran atau dimensi embedding yang dibuat. Semakin besar nilai dari `embedding_size` akan membuat model semakin akurat, namun jika berlebihan akan mengakibatkan model menjadi overfit. Untuk itu pada proyek ini juga menggunakan `optuna` untuk mencari nilai yang optimal. Selanjutnya, dilakukan operasi perkalian *dot product* antara embedding user dan buku. Selain itu, kita juga dapat menambahkan bias untuk setiap user dan buku. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi aktivasi sigmoid.
+
+Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan Adam sebagai optimizer dengan learning rate sebesar 0.001
+
+Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang ditunjukkan berikut ini.
+
+![Top-10 Book Recommendation](https://i.postimg.cc/zBDrZvck/Top-10-Recommendation.png)
 
 ## Evaluation
-Pada proyek ini, model yang dikembangkan adalah kasus klasifikasi dan menggunakan metriks akurasi, f1-score, recall dan precision. Berikut hasil pengukuran model yang dipilih yaitu model yang menggunakan algoritma Random Forest
-![Metriks Evaluasi](https://github.com/user-attachments/assets/60211e3c-9ab6-48f8-9592-0d10bf9cf8c0)
+Pada proyek ini menggunakan metrik RMSE (Root Mean Square Error) untuk mengevaluasi kinerja model yang dihasilkan. RMSE adalah cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif [[2](https://towardsdatascience.com/what-does-rmse-really-mean-806b65f2e48e)]. Root Mean Squared Error (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus berikut ini.
 
--Akurasi Akurasi merupakan metrik untuk menghitung persentase dari total data yang diidentifikasi dan dinilai benar. Rumus akurasi sebagai berikut : ``` AKURASI = (TP + TN) / (TP+FP+FN+TN)```
-* _True Positive_ (TP):
-    Kasus dimana model merupakan data positif yang diprediksi benar. Contohnya, pasien menderita stroke (class 1) dan dari model yang dibuat memprediksi pasien tersebut menderita stroke (class 1).
-    * _True Negative_ (TN):
-    Kasus dimana model merupakan data negatif yang diprediksi benar. Contohnya, pasien tidak menderita stroke (class 2) dan dari model yang dibuat memprediksi pasien tersebut tidak menderita stroke (class 2).
-    * _False Positive_ (FP) - **Type I Error** :
-    Kasus dimana model merupakan data negatif namun diprediksi sebagai data positif. Contohnya, pasien tidak menderita stroke (class 2) tetapi dari model yang telah memprediksi pasien tersebut menderita stroke (class 1).
-    * _False Negative_ (FN) - **Type II Error** :
-    Kasus dimana model merupakan data negatif namun diprediksi sebagai data positif. Contohnya, pasien tidak menderita stroke (class 2) tetapi dari model yang telah memprediksi pasien tersebut menderita stroke (class 1).
-* _Precision_
-    _Precision_ merupakan metrik untuk memprediksi benar positif dari keseluruhan hasil yang diprediksi positf. Rumus _precision_ sebagai berikut: ``` PRECISION = TP / (TP+FP)```
-  _Recall_
-    _Recall_ merupakan metrik untuk memprediksi benar positif dibandingkan dengan keseluruhan data yang benar positif. Rumus _precision_ sebagai berikut: ``` RECALL = TP / (TP+FN)```
-  f1-score_
-    _f1-score_ merupakan metrik untuk perbandingan rata-rata precision dan recall yang dibobotkan. Rumus _f1-score_ sebagai berikut: ``` F1 SCORE = 2 * (RECALL * PRECISION) / (RECALL + PRECISION) ```
-  
-- Model yang telah dibangun telah menjawab problem statement karena dapat mengidentifikasi resiko diabetes dengan akurasi yang tinggi serta dapat melakukan evaluasi terhadap model tersebut dengan banyak parameter evaluasi yang digunakan
-- Hasil model sangat mencapai target sesuai yang diharapkan dengan bagusnya akurasi model
-- Setiap solusi statement yang saya rencanakan berdampak pada model
-  **Pertama** : data tidak memiliki missing value dan penghapusan duplikat berdampak Pencegahan Bias dimana Data duplikat dapat memberikan bobot yang tidak semestinya pada sampel yang sama selama pelatihan model. Ini dapat menyebabkan model menjadi bias terhadap sampel duplikat dan kurang mampu menggeneralisasi dengan baik pada data yang unik serta Peningkatan Efisiensi Pelatihan
-  **Kedua** : Split data tidak secara langsung mengubah cara kerja algoritma Random Forest, tetapi memungkinkan melatih dan mengevaluasi model secara efektif. Model Random Forest akan dilatih menggunakan 80% data, dan kemampuannya untuk menggeneralisasi akan diukur pada 20% data yang tidak pernah dilihatnya selama pelatihan.
-  **Ketiga** : Pemilihan parameter yang sesuai akan secara langsung mempengaruhi kinerja model Random Forest. Parameter yang optimal akan memungkinkan model untuk mempelajari pola risiko diabetes secara efektif dari data pelatihan dan membuat prediksi yang akurat pada data pengujian.
-  **Terakhir** : accuracy, recall, presision dan f1 score serta menampilkan confussion matriks tidak mengubah model itu sendiri, tetapi memberikan pemahaman tentang seberapa baik model tersebut bekerja dalam mengidentifikasi risiko diabetes.
+![RMSE](https://i.postimg.cc/tgjfntZk/RMSE.png)
+
+`RMSE` = nilai root mean square error
+
+`y`  = nilai hasil observasi
+
+`ŷ`  = nilai hasil prediksi
+
+`i`  = urutan data
+
+`n`  = jumlah data
+
+Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu model prakiraan mendekati variasi nilai obeservasinya. RMSE menghitung seberapa berbedanya seperangkat nilai. Semakin kecil nilai RMSE, semakin dekat nilai yang diprediksi dan diamati.
+
+Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
+
+![Model Metrics](https://i.postimg.cc/m2n2YY5W/Model-Metrics.png)
+
+Pada plot di atas dapat diketahui bahwa model memiliki skor nilai RMSE sebesar 0.185 yang mana bisa dikatakan sudah cukup bagus. Namun, meskipun begitu masih dapat dikembangkan lebih lanjut untuk meminimalkan error.
+
 
 
   
