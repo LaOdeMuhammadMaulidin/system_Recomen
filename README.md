@@ -86,7 +86,8 @@ Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan 
 
 Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang ditunjukkan berikut ini.
 
-![Top-10 Book Recommendation](https://i.postimg.cc/zBDrZvck/Top-10-Recommendation.png)
+![Top-10 Book Recommendation](![image](https://github.com/user-attachments/assets/a0527e81-996e-4d7a-89fc-1b410db21ce3)
+)
 
 ## Evaluation
 Pada proyek ini menggunakan metrik RMSE (Root Mean Square Error) untuk mengevaluasi kinerja model yang dihasilkan. RMSE adalah cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif [[2](https://towardsdatascience.com/what-does-rmse-really-mean-806b65f2e48e)]. Root Mean Squared Error (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus berikut ini.
@@ -107,9 +108,10 @@ Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu mod
 
 Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
 
-![Model Metrics](https://i.postimg.cc/m2n2YY5W/Model-Metrics.png)
+![Model Metrics](![image](https://github.com/user-attachments/assets/97b5af90-8f48-445b-b677-1e12d02edfee)
+)
 
-Pada plot di atas dapat diketahui bahwa model memiliki skor nilai RMSE sebesar 0.185 yang mana bisa dikatakan sudah cukup bagus. Namun, meskipun begitu masih dapat dikembangkan lebih lanjut untuk meminimalkan error.
+
 
 
 
