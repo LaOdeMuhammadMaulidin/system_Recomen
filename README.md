@@ -26,8 +26,8 @@ Menjelaskan tujuan dari pernyataan masalah:
 
 
     ### Solution statements
-    - Menganalisis riwayat interaksi pengguna seperti rating atau pencarian buku
-    - Menampilkan daftar rekomendasi buku secara otomatis dan dinamis sesuai perilaku pengguna.
+    - Menganalisis riwayat interaksi pengguna seperti rating atau pencarian buku menggunakan Collaborative filtering
+    - Menampilkan daftar rekomendasi buku secara otomatis dan dinamis sesuai perilaku pengguna menggunakan Collaborative filtering.
 
 ## Data Understanding
 
