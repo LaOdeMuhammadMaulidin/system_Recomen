@@ -60,9 +60,8 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
 
  - `User-ID` : berisi ID unik pengguna
  - `ISBN` : berisi kode ISBN buku yang diberi rating oleh pengguna
- - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10
+ - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10![Screenshot 2025-05-29 085451](https://github.com/user-attachments/assets/3fe2b5c6-59ce-4114-8b56-4309dcf43f44)
 
-![Cuplikan Data Rating](https://i.postimg.cc/wB2m0Qnc/Screenshot-39.png)
 
 ## Data Preparation
 Teknik yang digunakan dalam penyiapan data *(Data Preparation)* yaitu:
