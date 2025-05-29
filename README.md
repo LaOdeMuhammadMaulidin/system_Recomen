@@ -60,7 +60,7 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
 
  - `User-ID` : berisi ID unik pengguna
  - `ISBN` : berisi kode ISBN buku yang diberi rating oleh pengguna
- - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10![Screenshot 2025-05-29 085451](https://github.com/user-attachments/assets/3fe2b5c6-59ce-4114-8b56-4309dcf43f44)
+ - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10
 
 
 ## Data Preparation
@@ -85,7 +85,8 @@ Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan 
 
 Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang ditunjukkan berikut ini.
 
-![Top-10 Book Recommendation](https://github.com/user-attachments/assets/e6d56810-9c21-4aa2-b7b2-f9b887e57e7d)
+![Recomendaton Book](https://github.com/user-attachments/assets/59620240-cef6-42c9-a4a1-1401883252da)
+
 
 
 ## Evaluation
@@ -107,7 +108,8 @@ Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu mod
 
 Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
 
-![Model Metrics](https://github.com/user-attachments/assets/956e36e7-8e84-4d9f-9583-5872e694e7e1)
+![Model Metrics](https://github.com/user-attachments/assets/b682c383-1643-4e29-8955-79c4135069c0)
+
 
 
 
