@@ -31,7 +31,8 @@ Menjelaskan tujuan dari pernyataan masalah:
 
 ## Data Understanding
 
- ![Book Recommendation Dataset](https://i.postimg.cc/0Q4fcMDB/rsz-bookrecommendationdataset.jpg)
+![Dataset Book Recomendation](https://github.com/user-attachments/assets/5a13192d-aae5-4132-a4e1-bfbe3560cf80)
+
 
 Informasi Dataset:
 
@@ -83,7 +84,7 @@ Pertama, kita melakukan proses embedding terhadap data user dan buku. Jumlah use
 
 Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan Adam sebagai optimizer dengan learning rate sebesar 0.001
 
-Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang ditunjukkan berikut ini.
+Model yang telah dibuat dapat menghasilkan rekomendasi buku seperti yang ditunjukkan berikut ini.
 
 ![Recomendaton Book](https://github.com/user-attachments/assets/59620240-cef6-42c9-a4a1-1401883252da)
 
@@ -92,7 +93,8 @@ Model yang telah dibuat dapat menghasilkan top-10 rekomendasi buku seperti yang 
 ## Evaluation
 Pada proyek ini menggunakan metrik RMSE (Root Mean Square Error) untuk mengevaluasi kinerja model yang dihasilkan. RMSE adalah cara standar untuk mengukur kesalahan model dalam memprediksi data kuantitatif [[2](https://towardsdatascience.com/what-does-rmse-really-mean-806b65f2e48e)]. Root Mean Squared Error (RMSE) mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi – observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. Perhitungan RMSE ditunjukkan pada rumus berikut ini.
 
-![RMSE](https://i.postimg.cc/tgjfntZk/RMSE.png)
+![Rumus RMSE](https://github.com/user-attachments/assets/2eb77aff-c3ec-4b69-a0e1-110a0a86f86c)
+
 
 `RMSE` = nilai root mean square error
 
