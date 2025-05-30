@@ -16,7 +16,6 @@ Sistem rekomendasi telah banyak digunakan oleh perusahaan teknologi besar sepert
 
 Beradasarkan latar belakang di atas didapatkan rincian masalah:
 - pengguna menghadapi kesulitan dalam menemukan buku yang relevan dengan minat dan preferensi pribadi mereka.
-- Bagaimana melakukan evaluasi untuk membuat model machine learning yang efisien guna mengidentifikasi resiko stroke?
 
 ### Goals
 
@@ -46,7 +45,7 @@ Usability | 10.0
 
 Pada Dataset ini terdapat 3 berkas csv diantaranya yaitu `Books.csv` , `Ratings.csv` , dan `Users.csv`
 
-Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.360 baris dan memiliki 8 kolom, diantaranya adalah :  
+Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.353 baris dan memiliki 8 kolom, diantaranya adalah :  
 
 - `ISBN` : berisi kode ISBN dari buku  
 - `Book-Title` : berisi judul buku
@@ -62,6 +61,11 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
  - `User-ID` : berisi ID unik pengguna
  - `ISBN` : berisi kode ISBN buku yang diberi rating oleh pengguna
  - `Book-Rating` : berisi nilai rating yang diberikan oleh pengguna berkisar antara 0-10
+
+   Pada berkas `User.csv` memuat data pengguna. Data ini memiliki 278.858 baris dan 3 kolom, yaitu:
+    - `User-ID` : berisi ID unik pengguna
+    - `Location`: berisi lokasi alamat pengguna
+    - `Age` : berisi umur pengguna
 
 
 ## Data Preparation
