@@ -45,7 +45,7 @@ Usability | 10.0
 
 Pada Dataset ini terdapat 3 berkas csv diantaranya yaitu `Books.csv` , `Ratings.csv` , dan `Users.csv`
 
-Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.353 baris dan memiliki 8 kolom, diantaranya adalah :  
+Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.360 baris dan memiliki 8 kolom, diantaranya adalah :  
 
 - `ISBN` : berisi kode ISBN dari buku  
 - `Book-Title` : berisi judul buku
@@ -55,6 +55,7 @@ Pada berkas `Books.csv` memuat data-data buku yang terdiri dari 271.353 baris da
 - `Image-URL-S` : URL menuju gambar buku berukuran kecil
 - `Image-URL-M` : URL menuju gambar buku berukuran sedang
 - `Image-URL-L` : URL menuju gambar buku berukuran besar
+Untuk Books.csv,  terdapat missing values pada kolom Book-Author (2 missing), Publisher (2 missing), dan Image-URL-L (3 missing) dan dilakukan teknik `dropna()` untuk mengatasinya
 
 Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. Data ini memiliki 1.149.780 baris dan memiliki 3 kolom, yaitu :  
 
@@ -66,6 +67,7 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
     - `User-ID` : berisi ID unik pengguna
     - `Location`: berisi lokasi alamat pengguna
     - `Age` : berisi umur pengguna
+  pada `Users.csv`, data awal terdapat 110.762 missing values pada kolom Age.
 
 
 ## Data Preparation
@@ -75,6 +77,7 @@ Teknik yang digunakan dalam penyiapan data *(Data Preparation)* yaitu:
 - **Randomize Dataset** : pengacakan data agar distribusi datanya menjadi random. Pengacakan data bertujuan untuk mengurangi varians dan memastikan bahwa model tetap umum dan *overfit less*. Pengacakan data juga memastikan bahwa data yang digunakan saat validasi merepresentasikan seluruh distribusi data yang ada.
 - **Data Standardization** : Pada data rating yang digunakan pada proyek ini berada pada rentang 0 hingga 10. Penerapan standarisasi menjadi rentang 0 hingga 1 dapat mempermudah saat proses training. Hal ini dikarenakan variabel yang diukur pada skala yang berbeda tidak memberikan kontribusi yang sama pada model fitting & fungsi model yang dipelajari dan mungkin berakhir dengan menciptakan bias jika data tidak distandarisasi terlebih dulu.
 - **Data Splitting** : dataset dibagi menjadi 2 bagian, yaitu data yang akan digunakan untuk melatih model (sebesar 80%) dan data untuk memvalidasi model (sebesar 20%). Tujuan dari pembagian data uji dan validasi tidak lain adalah untuk proses melatih model serta mengukur kinerja model yang telah didapatkan.
+- Teknik `buku.dropna(inplace=True)` diterapkan pada dataframe Books.csv untuk menangani missing values.
 
 ## Modeling
 Pada tahap ini, model menghitung skor kecocokan antara pengguna dan buku dengan teknik embedding. 
