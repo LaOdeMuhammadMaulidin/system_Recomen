@@ -72,12 +72,13 @@ Pada berkas `Ratings.csv` memuat data rating buku yang diberikan oleh pengguna. 
 
 ## Data Preparation
 Teknik yang digunakan dalam penyiapan data *(Data Preparation)* yaitu:
+- **Teknik `buku.dropna(inplace=True)`** diterapkan pada dataframe Books.csv untuk menangani missing values.
 - **Handling Imbalanced Data** : Seperti yang telah diketahui sebelumnya bahwa jumlah rating tidak seimbang (imbalance) yang mana sebagian besar user memberikan rating 0 pada buku. Hal ini dapat mengakibatkan model memiliki kinerja yang buruk. Untuk mengatasi hal tersebut, pada proyek ini data dengan rating 0 akan dihapus *(di-drop)*. Walaupun jumlah data saat ini berkurang drastis namun distribusi data menjadi lebih seimbang dan diharapkan memiliki kinerja yang lebih baik.
 - **Encoding** : dilakukan untuk menyandikan `User-ID` dan `ISBN` ke dalam indeks integer. Tahapan ini diperlukan karena kedua data tersebut berisi integer yang tidak berurutan (acak) dan gabungan string. Untuk itu perlu diubah ke dalam bentuk indeks.
 - **Randomize Dataset** : pengacakan data agar distribusi datanya menjadi random. Pengacakan data bertujuan untuk mengurangi varians dan memastikan bahwa model tetap umum dan *overfit less*. Pengacakan data juga memastikan bahwa data yang digunakan saat validasi merepresentasikan seluruh distribusi data yang ada.
-- **Data Standardization** : Pada data rating yang digunakan pada proyek ini berada pada rentang 0 hingga 10. Penerapan standarisasi menjadi rentang 0 hingga 1 dapat mempermudah saat proses training. Hal ini dikarenakan variabel yang diukur pada skala yang berbeda tidak memberikan kontribusi yang sama pada model fitting & fungsi model yang dipelajari dan mungkin berakhir dengan menciptakan bias jika data tidak distandarisasi terlebih dulu.
+- **Data Standardization** : Pada data rating yang digunakan pada proyek ini berada pada rentang 0 hingga 10. Penerapan standarisasi menjadi rentang 0 hingga 1 dapat mempermudah saat proses training. Hal ini dikarenakan variabel yang diukur pada skala yang berbeda tidak memberikan kontribusi yang sama pada model fitting & fungsi model yang dipelajari dan mungkin berakhir dengan menciptakan bias jika data tidak distandarisasi terlebih dulu. digunakan pula `df['Book-Rating'] = df['Book-Rating'].values.astype(np.float32)` untuk mengkonversi ntipe data book-rating menjadi float
 - **Data Splitting** : dataset dibagi menjadi 2 bagian, yaitu data yang akan digunakan untuk melatih model (sebesar 80%) dan data untuk memvalidasi model (sebesar 20%). Tujuan dari pembagian data uji dan validasi tidak lain adalah untuk proses melatih model serta mengukur kinerja model yang telah didapatkan.
-- Teknik `buku.dropna(inplace=True)` diterapkan pada dataframe Books.csv untuk menangani missing values.
+
 
 ## Modeling
 Pada tahap ini, model menghitung skor kecocokan antara pengguna dan buku dengan teknik embedding. 
@@ -119,6 +120,7 @@ Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu mod
 Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
 
 ![Model Metrics](https://github.com/user-attachments/assets/b682c383-1643-4e29-8955-79c4135069c0)
+Berdasarkan metriks tersebut menunjukkan bahwa model yang telah dibuat memiliki nilai Validasi Root Mean Squared Error (RMSE) sebesar 0.185
 
 
 
