@@ -94,7 +94,8 @@ Model ini juga di-compile dengan fungsi loss binarycrossentropy dan menggunakan 
 
 Model yang telah dibuat dapat menghasilkan rekomendasi buku seperti yang ditunjukkan berikut ini.
 
-![Rekomendasi buku](https://github.com/user-attachments/assets/5ecbeace-f225-40ad-886f-e3bb9f4e2937)
+![5 Rekomendasi Buku](https://github.com/user-attachments/assets/6aca4c9c-e0ed-48f8-bc10-78a013825c85)
+
 
 
 
